@@ -29,6 +29,7 @@ if [[ $DISABLE_HTTPS -ne 1 ]]; then
             --standalone \
             --pre-hook "if [[ -d /var/run/s6/services/nginx ]]; then s6-svc -d /var/run/s6/services/nginx; fi" \
             --post-hook "if [[ -d /var/run/s6/services/nginx ]]; then s6-svc -u /var/run/s6/services/nginx; fi" \
+            $LETSENCRYPT_EXTRA_OPTS \
             -d $LETSENCRYPT_DOMAIN
         rc=$?
         if [[ $rc -eq 1 ]]; then
