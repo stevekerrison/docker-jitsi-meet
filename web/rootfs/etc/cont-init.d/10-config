@@ -13,6 +13,8 @@ if [[ $DISABLE_HTTPS -ne 1 ]]; then
         mkdir -p /config/acme.sh
         pushd /opt
         sh ./acme.sh --install --home /config/acme.sh --accountemail $LETSENCRYPT_EMAIL
+        # Acme.sh now uses ZeroSSL by default, so override this
+        sh ./acme.sh --set-default-ca letsencrypt
         popd
 
         STAGING=""
